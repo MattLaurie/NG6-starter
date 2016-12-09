@@ -4,13 +4,25 @@ The reason for this fork was to reorganise the project to be closer to Angular 2
 
 ## Changes
 
-* Renamed `client` to `src`
 * Use Angular 1.5 components
+* Use Amazon Cognito for managing users
 * Use Angular Material
 * Build-specific environment files via Webpack
 * Use named ui-router views to allow components to determine the layout e.g. which toolbar to display
+* Renamed `client` to `src`
 * Got rid of `src/app/components` directory
 * Removed top-level `app` component in favour of directly setting root layout in `index.html`
+
+## Recommended reading
+
+* [ECMAScript 6 ](https://github.com/lukehoban/es6features#readme)
+* [Webpack](http://webpack.github.io)
+* [Angular Material](https://material.angularjs.org)
+* [Sass](http://sass-lang.com/)
+* [Amazon Cognito Identity SDK for JavaScript](https://github.com/aws/amazon-cognito-identity-js)
+    * [Announcing Your User Pools in Amazon Cognito](https://aws.amazon.com/blogs/mobile/announcing-your-user-pools-in-amazon-cognito/#)
+    * [Integrating Amazon Cognito User Pools with API Gateway](https://aws.amazon.com/blogs/mobile/integrating-amazon-cognito-user-pools-with-api-gateway/)
+    * [Accessing Your User Pools using the Amazon Cognito Identity SDK for JavaScript](https://aws.amazon.com/blogs/mobile/accessing-your-user-pools-using-the-amazon-cognito-identity-sdk-for-javascript/)  
 
 ## Updated file structure
 
@@ -121,6 +133,65 @@ export class TestController {
   }
 }
 ```
+
+## Configuring Amazon Cognito
+
+Use [https://github.com/aws/amazon-cognito-identity-js](https://github.com/aws/amazon-cognito-identity-js) to configure 
+a User Pool and a Federated Identity.  Do not generate a secret when you create the application client id since there is
+no way for a web application to protect that secret.
+
+Take the details from the User Pool and Federated Identity and place them into the `environments/environment.js` and
+`environments/environment.dist.js` files (or create a different environment for production release):
+
+```
+export const environment = {
+  production: false,
+  aws: {
+    region: 'us-east-1',
+    userPoolId: 'us-east-X_XXXXXXXXX',
+    clientId: 'XXXXXXXXXXXXXXXXXXXXXXXXXX',
+    identityPoolId: 'us-east-1:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
+  }
+};
+```
+
+## Using Amazon Cognito
+
+The bulk of the work of using Amazon Cognito is handled by the `amazon-cognito-identity-js` library.  The application
+should access these library calls via `AuthService`.  This service wraps all of the library calls in Promises to 
+make it easier to deal with.
+
+Within `SharedModule` there are two Angular run blocks that handle the basics of getting Amazon Cognito started:
+
+* `authInitialise` - will run to check if a user is authenticated (refreshing credentials if required)
+* `authGuard` - will use a `data` property on the route to require users to be authenticated to access the route
+
+Note that these run blocks have been temporarily disabled within `shared/shared.module.js` until the credentials have 
+been entered into the environment.
+
+To declare a route as requiring authentication add a `requiresAuth: true` to the `data` block. e.g.
+
+```
+.state('app.dashboard', {
+  url: '/dashboard',
+  views: {
+    'content@': {
+      component: 'dashboard'
+    },
+    'toolbar@': {
+      component: 'appToolbar'
+    },
+    'sidenav@': {
+      component: 'appSidenav'
+    }
+  },
+  data: {
+    requiresAuth: true
+  }
+});
+```
+
+Note if the user is not authenticated the user will be redirect to `app.signin` state (which doesn't exist)
 
 ## TODO
 
