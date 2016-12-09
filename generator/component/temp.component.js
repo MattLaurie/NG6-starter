@@ -1,12 +1,11 @@
-import template from './<%= name %>.html';
-import controller from './<%= name %>.controller';
-import './<%= name %>.scss';
+import './<%= name %>.component.scss';
 
-let <%= name %>Component = {
-  restrict: 'E',
-  bindings: {},
-  template,
-  controller
+class <%= upCaseName %>Controller {
+  constructor() {
+  }
+}
+
+export const <%= upCaseName %>Component = {
+  template: require('./<%= name %>.component.html'),
+  controller: <%= upCaseName %>Controller
 };
-
-export default <%= name %>Component;

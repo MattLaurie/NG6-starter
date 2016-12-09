@@ -17,20 +17,16 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import colorsSupported      from 'supports-color';
 import historyApiFallback   from 'connect-history-api-fallback';
 
-let root = 'client';
+let root = 'src';
 
 // helper method for resolving paths
 let resolveToApp = (glob = '') => {
   return path.join(root, 'app', glob); // app/{glob}
 };
 
-let resolveToComponents = (glob = '') => {
-  return path.join(root, 'app/components', glob); // app/components/{glob}
-};
-
 // map of all paths
 let paths = {
-  js: resolveToComponents('**/*!(.spec.js).js'), // exclude spec files
+  js: resolveToApp('**/*!(.spec.js).js'), // exclude spec files
   scss: resolveToApp('**/*.scss'), // stylesheets
   html: [
     resolveToApp('**/*.html'),
@@ -38,7 +34,7 @@ let paths = {
   ],
   entry: [
     'babel-polyfill',
-    path.join(__dirname, root, 'app/app.js')
+    path.join(__dirname, root, 'app/app.module.js')
   ],
   output: root,
   blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
@@ -103,7 +99,7 @@ gulp.task('component', () => {
   };
   const name = yargs.argv.name;
   const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToComponents(), parentPath, name);
+  const destPath = path.join(resolveToApp(), parentPath, name);
 
   return gulp.src(paths.blankTemplates)
     .pipe(template({

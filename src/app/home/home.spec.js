@@ -1,15 +1,15 @@
-import {<%= upCaseName %>Module} from './<%= name %>.module'
+import {HomeModule} from './home.module'
 
-describe('<%= upCaseName %>', () => {
+describe('Home', () => {
 
-  beforeEach(window.module(<%= upCaseName %>Module));
+  beforeEach(window.module(HomeModule));
 
   describe('with controller', () => {
     let controller, scope;
 
     beforeEach(inject(($rootScope, $componentController) => {
       scope = $rootScope.$new();
-      controller = $componentController('<%= name %>', { $scope: scope });
+      controller = $componentController('home', { $scope: scope });
     }));
 
     it ('should be attached to the scope', () => {

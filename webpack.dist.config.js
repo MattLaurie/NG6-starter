@@ -10,6 +10,12 @@ config.output = {
 
 config.plugins = config.plugins.concat([
 
+  // Have webpack return the production environment for imports from 'environment'
+  new webpack.NormalModuleReplacementPlugin(
+    /environment/,
+    path.resolve('./src/environments/environment.dist.js')
+  ),
+
   // Reduces bundles total size
   new webpack.optimize.UglifyJsPlugin({
     mangle: {

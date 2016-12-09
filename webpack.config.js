@@ -18,7 +18,7 @@ module.exports = {
     // It also adds hash to all injected assets so we don't have problems
     // with cache purging during deployment.
     new HtmlWebpackPlugin({
-      template: 'client/index.html',
+      template: 'src/index.html',
       inject: 'body',
       hash: true
     }),

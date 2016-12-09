@@ -4,7 +4,11 @@
   "description": "Starter for Angular + ES6 + (Webpack or JSPM)",
   "main": "index.js",
   "dependencies": {
-    "angular": "^1.5.0",
+    "angular": "^1.5.9",
+    "angular-animate": "^1.5.9",
+    "angular-aria": "^1.5.9",
+    "angular-material": "^1.1.1",
+    "angular-messages": "^1.6.0",
     "angular-ui-router": "^1.0.0-beta.1",
     "normalize.css": "^3.0.3"
   },

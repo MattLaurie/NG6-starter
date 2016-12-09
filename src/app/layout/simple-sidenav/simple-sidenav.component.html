@@ -1,0 +1,27 @@
+<md-sidenav
+  layout="column"
+  style="height: 100%"
+  class="md-sidenav-left"
+  md-component-id="left"
+  md-is-locked-open="$mdMedia('gt-md')">
+
+  <md-content style="height: 100%">
+    <md-toolbar class="md-primary" hide-gt-md layout="column">
+      <span flex></span>
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Example</span>
+        </h2>
+      </div>
+    </md-toolbar>
+    <md-list flex>
+      <md-list-item  ui-sref="app.home">
+        <p class="md-list-item-text">Home</p>
+      </md-list-item>
+      <md-list-item  ui-sref="app.example">
+        <p class="md-list-item-text">Example</p>
+      </md-list-item>
+    </md-list>
+  </md-content>
+
+</md-sidenav>
