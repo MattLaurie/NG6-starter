@@ -2,6 +2,14 @@
 
 The reason for this fork was to reorganise the project to be closer to Angular 2 and Angular CLI project layout.
 
+This layout and changes are definitely not for everyone.  Treat it as a starting off point or even just a reference of one approach that works.
+
+## Why not just use Angular 2?
+
+Angular 2 would definitely be the right technical choice but it was a matter of whether we could find people to do the work.  Moving back to Angular 1 but setting out a clear upgrade path to Angular 2 was the best approach at the time.
+
+One nice feature of staying in Angular 1 though is that Material 1 is much further ahead of Material 2.
+
 ## Changes
 
 * Use Angular 1.5 components
