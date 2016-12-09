@@ -15,19 +15,23 @@ The reason for this fork was to reorganise the project to be closer to Angular 2
 ## Updated file structure
 
 ```
-src
-..index.html
+src/
+..index.html * the top level page
 ..environments/
 ....environment.dist.js * the production environment settings
 ....environment.js * the development environment settings
 ⋅⋅app/
-⋅⋅⋅⋅app.module.js * app entry file
+⋅⋅⋅⋅app.module.js * app entry
 ....app.theme.scss * app root theme 
-....shared/ * all shared components and services
-....layout/ * all layout specific components e.g. toolbar, sidenav
-....home/ * a default home route
-....example/ * a simple `/example` route
+....shared/ * any shared components and services
+....layout/ * any layout specific components e.g. toolbar, sidenav
+......simple-sidenav/ * a simple side navigation menu
+......simple-toolbar/ * a simple top menu
+....home/ * a default home "/" route
+....example/ * a simple "/example" route
 ```
+
+Note that the `home` and `example` routes should be discarded in favour of the real application.
 
 The `generator` Gulp task has also been updated to match the new layout style:
 
@@ -45,6 +49,35 @@ The `generator` is invoked via:
 
 ```
 $ npm run component -- --name example
+```
+
+## Named views with Angular Router
+
+At the top-level `index.html` there are three named Angular Router views: 
+* `toolbar` - the top menu
+* `sidenav` - the side menu
+* `content` - the content
+
+Each defined route can specify what the contents of each of these named views should be.
+
+e.g. a home route might display the `home` component in `content` with the `simpleToolbar` and `simpleSidenav` 
+in `toolbar` and `sidenav` respectively:
+
+```
+.state('app.home', {
+  url: '/',
+  views: {
+    'content@': {
+      component: 'home'
+    },
+    'toolbar@': {
+      component: 'simpleToolbar'
+    },
+    'sidenav@': {
+      component: 'simpleSidenav'
+    }
+  }
+})
 ```
 
 ## Configuring the environment
@@ -89,7 +122,9 @@ export class TestController {
 }
 ```
 
-## TODO: Unpin Angular version
+## TODO
+
+### Unpin Angular version
 
 Had to pin the version of Angular to `1.5.9` due to the Angular Material not supporting `1.6.0+` yet.
 
@@ -98,3 +133,7 @@ $ npm install angular@1.5.9 angular-animate@1.5.9 angular-aria@1.5.9 --save
 ```
 
 Follow https://github.com/angular/material/issues/10111 for when it's safe to unpin the above.
+
+### Fix unit tests
+
+Currently the unit tests will fail due to the Angular Material library not being included correctly.
