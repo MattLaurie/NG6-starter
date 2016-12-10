@@ -144,9 +144,7 @@ export class TestController {
 
 ## Configuring Amazon Cognito
 
-Use [https://github.com/aws/amazon-cognito-identity-js](https://github.com/aws/amazon-cognito-identity-js) to configure 
-a User Pool and a Federated Identity.  Do not generate a secret when you create the application client id since there is
-no way for a web application to protect that secret.
+See [COGNITO.md](docs/cognito/COGNITO.md) for more details on configuring Amazon Cognito.
 
 Take the details from the User Pool and Federated Identity and place them into the `environments/environment.js` and
 `environments/environment.dist.js` files (or create a different environment for production release):
