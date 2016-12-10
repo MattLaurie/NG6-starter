@@ -133,7 +133,7 @@ e.g. Here "custom:active_company" stores the identifier of the active company fo
 It is also possible to configure attributes that are read-only to the user.  This will allow you to configure system 
 information associated with a user
   
-e.g. Here "custom:sub_until" is a read-only attribute showing when the date the user has subscribed up to
+e.g. Here "custom:active_until" is a read-only attribute showing when the date the user has subscribed up to
 
 ![cognito-15](cognito-15.png?raw=true)
 
