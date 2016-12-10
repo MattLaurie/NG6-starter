@@ -1,4 +1,5 @@
 import angular from 'angular';
+import {AuthService} from "./auth.service";
 
 export function authInitialise(AuthService) {
   "ngInject";
