@@ -1,8 +1,15 @@
+import ngMaterial from 'angular-material';
+import 'angular-material/angular-material-mocks';
+
 import {LayoutModule} from '../layout.module'
 
 describe('SimpleToolbar', () => {
   let controller, scope;
-  beforeEach(window.module(LayoutModule));
+  beforeEach(() => {
+    window.module(ngMaterial);
+    window.module('ngMaterial-mock');
+    window.module(LayoutModule);
+  });
 
   beforeEach(inject(($rootScope, $componentController) => {
     scope = $rootScope.$new();

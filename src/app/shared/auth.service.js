@@ -57,7 +57,6 @@ export class AuthService {
         }
       });
     } else {
-      console.log('no user');
       defer.reject('no_user');
     }
     return defer.promise;
@@ -93,7 +92,6 @@ export class AuthService {
    * @returns {Function}
    */
   signin(email, password) {
-    console.log('AWS.config.region', AWS.config.region);
     let defer = this.$q.defer();
     const authDetails = new AuthenticationDetails({
       Username: email,
@@ -173,13 +171,10 @@ export class AuthService {
    */
   confirmUser(email, code) {
     let defer = this.$q.defer();
-    console.log('confirmUser: email=' + email + ', code=' + code);
-    console.log('confirmUser: credentials', AWS.config.credentials);
     let cognitoUser = new CognitoUser({
       Username: email,
       Pool: this.userPool
     });
-    console.log('confirmUser: cognitoUser', cognitoUser);
     cognitoUser.confirmRegistration(code, true, (error, result) => {
       if (error) {
         defer.reject(error);

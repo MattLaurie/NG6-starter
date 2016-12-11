@@ -1,8 +1,17 @@
-import {HomeModule} from './home.module'
+import uiRouter from 'angular-ui-router';
+import ngMaterial from 'angular-material';
+import 'angular-material/angular-material-mocks';
+
+import {HomeModule} from './home.module';
 
 describe('Home', () => {
 
-  beforeEach(window.module(HomeModule));
+  beforeEach(() => {
+    window.module(uiRouter);
+    window.module(ngMaterial);
+    window.module('ngMaterial-mock');
+    window.module(HomeModule);
+  });
 
   describe('with controller', () => {
     let controller, scope;

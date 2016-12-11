@@ -210,7 +210,3 @@ $ npm install angular@1.5.9 angular-animate@1.5.9 angular-aria@1.5.9 --save
 ```
 
 Follow https://github.com/angular/material/issues/10111 for when it's safe to unpin the above.
-
-### Fix unit tests
-
-Currently the unit tests will fail due to the Angular Material library not being included correctly.

@@ -1,8 +1,17 @@
+import uiRouter from 'angular-ui-router';
+import ngMaterial from 'angular-material';
+import 'angular-material/angular-material-mocks';
+
 import {ExampleModule} from './example.module'
 
 describe('Example', () => {
 
-  beforeEach(window.module(ExampleModule));
+  beforeEach(() => {
+    window.module(uiRouter);
+    window.module(ngMaterial);
+    window.module('ngMaterial-mock');
+    window.module(ExampleModule);
+  });
 
   describe('with controller', () => {
     let controller, scope;
