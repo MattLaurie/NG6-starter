@@ -199,6 +199,55 @@ To declare a route as requiring authentication add a `requiresAuth: true` to the
 
 Note if the user is not authenticated the user will be redirect to `app.signin` state (which doesn't exist)
 
+## Accessing services via dependency injection
+
+You want to access your services in your controllers via dependency injection.  The ng-annotate framework will take 
+care of giving you the correct controller with one trick: you need to use a pseudo-annotation "ngInject" to indicate 
+where you want the injection to occur.
+
+As an example, take the `AuthService` that has been declared in `SharedModule` like a standard Angular `service`.
+
+shared.module.js
+```
+import {AuthService} from "./auth.service";
+
+export const SharedModule = angular.module('app.shared', [])
+  .service('AuthService', AuthService);
+```
+
+To access this within the `HomeController` of `HomeComponent` you would do the following: 
+
+home.component.js
+```
+class HomeController {
+  constructor(AuthService) {  
+    "ngInject";
+    this.auth = AuthService;
+  }
+}
+```
+
+Note that:
+* The service is injected by the declared Angular name `AuthService`
+* The injection point is declared by the pseudo-annotation `"ngInject"`
+* The service is put into the instance of the class as a variable `auth`
+
+You can now use the `auth` variable to access the service 
+
+e.g. a basic signin  
+
+```
+  signin(email, password) {
+    this.auth.signin(email, password)
+      .then(() => {
+        console.log('success');
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  }
+```
+
 ## TODO
 
 ### Unpin Angular version

@@ -1,7 +1,9 @@
 import './home.component.scss';
 
 class HomeController {
-  constructor() {
+  constructor(AuthService) {
+    "ngInject";
+    this.auth = AuthService;
   }
 }
 
