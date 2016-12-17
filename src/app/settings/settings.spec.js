@@ -1,19 +1,18 @@
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import 'angular-material/angular-material-mocks';
+import {SettingsModule} from './settings.module'
 
-import {HomeModule} from './home.module';
-
-describe('Home', () => {
+describe('Settings', () => {
 
   beforeEach(() => {
     window.module(uiRouter);
     window.module(ngMaterial);
     window.module('ngMaterial-mock');
     window.module($provide => {
-      $provide.value('AuthService', {});  // TODO add a mock/spy of AuthService
+      $provide.value('AuthService', {});
     });
-    window.module(HomeModule);
+    window.module(SettingsModule);
   });
 
   describe('with controller', () => {
@@ -21,7 +20,7 @@ describe('Home', () => {
 
     beforeEach(inject(($rootScope, $componentController) => {
       scope = $rootScope.$new();
-      controller = $componentController('home', { $scope: scope });
+      controller = $componentController('settings', { $scope: scope });
     }));
 
     it ('should be attached to the scope', () => {

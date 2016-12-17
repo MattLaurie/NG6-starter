@@ -1,15 +1,15 @@
 import angular from 'angular';
-import {HomeComponent} from './home.component';
+import {SigninComponent} from './signin.component';
 
-export const HomeModule = angular.module('app.home', [])
+export const SigninModule = angular.module('app.signin', [])
   .config(($stateProvider) => {
     "ngInject";
     $stateProvider
-      .state('app.home', {
-        url: '/',
+      .state('app.signin', {
+        url: '/signin',
         views: {
           'content@': {
-            component: 'home'
+            component: 'signin'
           },
           'toolbar@': {
             component: 'defaultToolbar'
@@ -17,5 +17,5 @@ export const HomeModule = angular.module('app.home', [])
         }
       });
   })
-  .component('home', HomeComponent)
+  .component('signin', SigninComponent)
   .name;

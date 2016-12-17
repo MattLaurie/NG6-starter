@@ -1,0 +1,45 @@
+<div layout="column" layout-align="start center" style="height: 100%" class="hero-background">
+  <md-card>
+    <!--<md-card-title>-->
+      <!--<md-card-title-text>-->
+        <!--<span class="md-headline">Sign in to Example</span>-->
+      <!--</md-card-title-text>-->
+    <!--</md-card-title>-->
+    <md-toolbar class="md-primary md-hue-2">
+      <div class="md-toolbar-tools">
+        <span>Sign in to Example</span>
+      </div>
+    </md-toolbar>
+    <md-progress-linear md-mode="query" class="md-accent" ng-show="$ctrl.working"></md-progress-linear>
+    <md-card-content>
+      <p class="md-body-1">Example allows you to do that thing you feel is important but haven't found the time to do yet.</p>
+      <p class="md-body-1" ng-if="$ctrl.error">Error: {{ $ctrl.error.message }}</p>
+      <form name="f">
+        <md-input-container class="md-block">
+          <md-icon aria-label="email" class="material-icons">email</md-icon>
+          <input ng-model="$ctrl.signinForm.email" type="email" name="email" placeholder="Email" required>
+          <div ng-messages="f.email.$error">
+            <div ng-message="required">This is required</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <md-icon aria-label="lock" class="material-icons">lock</md-icon>
+          <input ng-model="$ctrl.signinForm.password" type="password" name="password" placeholder="Password"
+                 ng-minlength="8" required>
+          <div ng-messages="f.password.$error">
+            <div ng-message="required">This is required</div>
+          </div>
+        </md-input-container>
+      </form>
+
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ui-sref="app.recover">Forgot my password</md-button>
+      <md-button ui-sref="app.register">Register</md-button>
+      <span flex></span>
+      <md-button class="md-primary" ng-click="$ctrl.signin()" ng-disabled="!f.$valid">Sign in</md-button>
+    </md-card-actions>
+  </md-card>
+</div>
+

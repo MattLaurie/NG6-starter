@@ -1,0 +1,50 @@
+<md-step label="Confirm your email" md-complete="$ctrl.step.completed">
+  <md-step-body>
+
+    <md-content class="md-padding">
+      <p class="md-body-1">We have just sent your account email a confirmation code.  Enter it below and we can
+        Next with getting your account set up.</p>
+      <p ng-if="$ctrl.step.error">Error: {{$ctrl.step.error}}</p>
+
+      <form name="confirmform">
+        <md-input-container class="md-block" ng-if="$ctrl.needsData($ctrl.data.email)">
+          <md-icon aria-label="email" class="material-icons">email</md-icon>
+          <input ng-model="$ctrl.data.email" type="email" name="email" placeholder="Email"
+                 ng-required="$ctrl.needsData($ctrl.data.email)">
+          <div ng-messages="confirmform.email.$error">
+            <div ng-message="required">This is required</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" ng-if="$ctrl.needsData($ctrl.data.password)">
+          <md-icon aria-label="lock" class="material-icons">lock</md-icon>
+          <input ng-model="$ctrl.data.password" type="password" name="password" placeholder="Password"
+                 ng-minlength="8" ng-required="$ctrl.needsData($ctrl.data.password)">
+          <div ng-messages="confirmform.password.$error">
+            <div ng-message="required">This is required</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <md-icon aria-label="code" class="material-icons">email</md-icon>
+          <input ng-model="$ctrl.data.code" type="text" name="code" placeholder="Code" required>
+          <div ng-messages="confirmform.code.$error">
+            <div ng-message="required">This is required</div>
+          </div>
+        </md-input-container>
+      </form>
+    </md-content>
+
+    <md-step-actions layout="row">
+      <div flex>
+        <md-button ng-click="$ctrl.register.previousStep()">Back</md-button>
+      </div>
+      <div flex layout="row" layout-align="end top">
+        <md-button class="md-warn" ng-click="$ctrl.register.cancel()">Cancel</md-button>
+        <md-button ng-disabled="!confirmform.$valid" class="md-primary"
+                   ng-click="$ctrl.confirmEmail()">Next
+        </md-button>
+      </div>
+    </md-step-actions>
+  </md-step-body>
+</md-step>

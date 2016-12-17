@@ -1,6 +1,63 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
-body {
+body{
   font-family: 'Roboto', sans-serif;
+}
+
+// fix md-steppers style issue - See https://github.com/ipiz/md-steppers/issues/23
+.md-step.md-complete md-step-label-wrapper::before {
+  content: '\00A0'
+}
+.md-step.md-complete.md-active md-step-label-wrapper::before {
+  content: '\00A0'
+}
+
+#modal .content {
+  position: absolute;
+  width: 90%;
+  z-index: 1000;
+  left: 5%;
+  right: 5%;
+  top: 10px;
+}
+
+#modal .backdrop {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;
+  background: #000;
+  z-index: 500;
+  opacity: 0.5;
+}
+
+// NOTE: Check the demo's HTML to see some additional RTL support CSS
+// Setup animations similar to the ng-messages
+.hint {
+  // Position the hint
+  position: absolute;
+  left: 2px;
+  right: auto;
+  bottom: 7px;
+  // Copy styles from ng-messages
+  font-size: 12px;
+  line-height: 14px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  // Set our own color
+  color: grey;
+}
+
+.hint.ng-hide,
+.hint.ng-enter,
+.hint.ng-leave.ng-leave-active {
+  bottom: 26px;
+  opacity: 0;
+}
+
+.hint.ng-leave,
+.hint.ng-enter.ng-enter-active {
+  bottom: 7px;
+  opacity: 1;
 }

@@ -1,0 +1,37 @@
+<!--<div class="backdrop"></div>-->
+<!--<div class="content">-->
+<div layout="column" layout-align="start center" style="height: 100%">
+  <md-card>
+    <!--<md-card-title>-->
+    <!--<md-card-title-text>-->
+    <!--<span class="md-headline">Register an Example account</span>-->
+    <!--</md-card-title-text>-->
+    <!--</md-card-title>-->
+    <md-toolbar class="md-primary md-hue-2">
+      <div class="md-toolbar-tools">
+        <span><%= upCaseName %> Wizard</span>
+      </div>
+    </md-toolbar>
+    <md-stepper-card-content class="no-padding">
+      <md-steppers
+        md-dynamic-height
+        md-disable-tabs-behavior="true"
+        md-stretch-steppers="always"
+        md-selected="$ctrl.selectedStep"
+        md-busy-text="'Processing...'"
+        md-busy="$ctrl.showBusyText">
+
+        <<%= name %>-dummy
+          data="$ctrl.data"
+          step="$ctrl.stepData[0]"
+          ng-disabled="$ctrl.stepProgress < 1"></<%= name %>-dummy>
+
+        <<%= name %>-dummy
+          data="$ctrl.data"
+          step="$ctrl.stepData[1]"
+          ng-disabled="$ctrl.stepProgress < 2"></<%= name %>-dummy>
+
+      </md-steppers>
+    </md-stepper-card-content>
+  </md-card>
+</div>

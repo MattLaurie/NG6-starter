@@ -12,6 +12,7 @@
     "angular-messages": "^1.6.0",
     "angular-ui-router": "^1.0.0-beta.1",
     "aws-sdk": "^2.7.13",
+    "md-steppers": "^0.3.4",
     "normalize.css": "^3.0.3"
   },
   "devDependencies": {
@@ -61,6 +62,7 @@
   "scripts": {
     "build": "gulp webpack",
     "component": "gulp component",
+    "wizard": "gulp wizard",
     "serve": "gulp serve",
     "start": "gulp serve",
     "test": "karma start",

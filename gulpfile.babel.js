@@ -37,7 +37,8 @@ let paths = {
     path.join(__dirname, root, 'app/app.module.js')
   ],
   output: root,
-  blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
+  componentTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
+  wizardTemplates: path.join(__dirname, 'generator', 'wizard/**/*.**'),
   dest: path.join(__dirname, 'dist')
 };
 
@@ -101,7 +102,7 @@ gulp.task('component', () => {
   const parentPath = yargs.argv.parent || '';
   const destPath = path.join(resolveToApp(), parentPath, name);
 
-  return gulp.src(paths.blankTemplates)
+  return gulp.src(paths.componentTemplates)
     .pipe(template({
       name: name,
       upCaseName: cap(name)
@@ -111,6 +112,27 @@ gulp.task('component', () => {
     }))
     .pipe(gulp.dest(destPath));
 });
+
+gulp.task('wizard', () => {
+  const cap = (val) => {
+    return val.charAt(0).toUpperCase() + val.slice(1);
+  };
+  const name = yargs.argv.name;
+  const parentPath = yargs.argv.parent || '';
+  const destPath = path.join(resolveToApp(), parentPath, name);
+
+  return gulp.src(paths.wizardTemplates)
+    .pipe(template({
+      name: name,
+      upCaseName: cap(name)
+    }))
+    .pipe(rename((path) => {
+      path.dirname = path.dirname.replace('wizard', name);
+      path.basename = path.basename.replace('wizard', name);
+    }))
+    .pipe(gulp.dest(destPath));
+});
+
 
 gulp.task('clean', (cb) => {
   del([paths.dest]).then(function (paths) {

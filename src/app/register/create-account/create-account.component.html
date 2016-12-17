@@ -1,0 +1,60 @@
+<md-step label="Create an account" md-complete="$ctrl.step.completed">
+  <md-step-body>
+    <md-content class="md-padding">
+
+      <p class="md-body-1">First let's create an account you can use to sign in.  Since it's your primary way of
+        signing in we'll also send you a confirmation code to use in the next step.</p>
+      <p ng-if="$ctrl.step.error">Error: {{$ctrl.step.error}}</p>
+
+      <form name="createform">
+        <md-input-container class="md-block">
+          <md-icon aria-label="email" class="material-icons">email</md-icon>
+          <input ng-model="$ctrl.data.email" type="email" name="email" placeholder="Email" required>
+          <div ng-messages="createform.email.$error">
+            <div ng-message="required">This is required</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <md-icon aria-label="lock" class="material-icons">lock</md-icon>
+          <input ng-model="$ctrl.data.password" type="password" name="password" placeholder="Password"
+                 ng-minlength="8" password-policy required>
+            <div class="hint" style="text-align: right; width: 100%"><b>Password policy</b> use at least 8 characters including upper
+              case, lower case and numbers
+            </div>
+          <div ng-messages="createform.password.$error">
+            <div ng-message="required">This is required</div>
+            <div ng-message="passwordPolicy">Password policy not satisfied</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <md-icon aria-label="lock" class="material-icons">lock</md-icon>
+          <input ng-model="$ctrl.data.passwordConfirm" type="password" name="password_confirm"
+                 placeholder="Password (Confirm)"
+                 ng-minlength="8" match="$ctrl.data.password" required>
+          <div ng-messages="createform.password_confirm.$error">
+            <div ng-message="required">This is required</div>
+            <div ng-message="match">The passwords do not match</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <md-checkbox ng-model="$ctrl.data.contactMe" aria-label="Can contact me">
+            It's ok to send me (very occasional) email about Example
+          </md-checkbox>
+        </md-input-container>
+
+      </form>
+    </md-content>
+    <md-step-actions layout="row">
+      <div flex layout="row" layout-align="end top">
+        <md-button class="md-warn" ng-click="$ctrl.register.cancel()">Cancel</md-button>
+        <md-button ng-disabled="!createform.$valid" class="md-primary"
+                   ng-click="$ctrl.createAccount()">Next
+        </md-button>
+      </div>
+    </md-step-actions>
+
+  </md-step-body>
+</md-step>

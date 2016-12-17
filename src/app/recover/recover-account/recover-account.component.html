@@ -1,0 +1,29 @@
+<md-step label="Send reset code" md-complete="$ctrl.step.completed">
+  <md-step-body>
+    <md-content class="md-padding">
+
+      <p class="md-body-1">Forgot your password? Don't worry. Enter your account email below and
+        we'll send you a confirmation code you can use to reset your password.</p>
+      <p ng-if="$ctrl.step.error">Error: {{$ctrl.step.error}}</p>
+
+      <form name="recoverform">
+        <md-input-container class="md-block">
+          <md-icon aria-label="email" class="material-icons">email</md-icon>
+          <input ng-model="$ctrl.data.email" type="email" name="email" placeholder="Email" required>
+          <div ng-messages="recoverform.email.$error">
+            <div ng-message="required">This is required</div>
+          </div>
+        </md-input-container>
+      </form>
+    </md-content>
+    <md-step-actions layout="row">
+      <div flex layout="row" layout-align="end top">
+        <md-button class="md-warn" ng-click="$ctrl.recover.cancel()">Cancel</md-button>
+        <md-button ng-disabled="!recoverform.$valid" class="md-primary"
+                   ng-click="$ctrl.recoverAccount()">Next
+        </md-button>
+      </div>
+    </md-step-actions>
+
+  </md-step-body>
+</md-step>

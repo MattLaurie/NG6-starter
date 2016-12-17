@@ -20,6 +20,8 @@ One nice feature of staying in Angular 1 though is that Material 1 is much furth
 * Renamed `client` to `src`
 * Got rid of `src/app/components` directory
 * Removed top-level `app` component in favour of directly setting root layout in `index.html`
+* Added register and forgot password wizard flows 
+* Added a wizard generator component
 
 ## Recommended reading
 
@@ -49,6 +51,9 @@ src/
 ......simple-toolbar/ * a simple top menu
 ....home/ * a default home "/" route
 ....example/ * a simple "/example" route
+generator/
+..component/ * a simple example component template
+..wizard/ * a simple wizard component template
 ```
 
 Note that the `home` and `example` routes should be discarded in favour of the real application.
@@ -63,12 +68,23 @@ generator/
 ....temp.component.scss * the component styles
 ....temp.module.js * the module of the component
 ....temp.spec.js * the component tests
+..wizard/
+....wizard.component.html * the component HTML
+....wizard.component.js * the component itself
+....wizard.component.scss * the component styles
+....wizard.module.js * the module of the component
+....wizard.spec.js * the component tests
+....wizard-dummy/
+......wizard-dummy.component.html * a simple wizard component HTML example
+......wizard-dummy.component.js * a simple wizard component example
 ```
 
 The `generator` is invoked via:
 
 ```
 $ npm run component -- --name example
+OR
+$ npm run wizard -- --name example
 ```
 
 ## Named views with Angular Router
@@ -172,7 +188,7 @@ Within `SharedModule` there are two Angular run blocks that handle the basics of
 * `authInitialise` - will run to check if a user is authenticated (refreshing credentials if required)
 * `authGuard` - will use a `data` property on the route to require users to be authenticated to access the route
 
-Note that these run blocks have been temporarily disabled within `shared/shared.module.js` until the credentials have 
+Note that these run blocks have been temporarily disabled within `shared/auth.module.js` until the credentials have 
 been entered into the environment.
 
 To declare a route as requiring authentication add a `requiresAuth: true` to the `data` block. e.g.
@@ -207,7 +223,7 @@ where you want the injection to occur.
 
 As an example, take the `AuthService` that has been declared in `SharedModule` like a standard Angular `service`.
 
-shared.module.js
+auth.module.js
 ```
 import {AuthService} from "./auth.service";
 

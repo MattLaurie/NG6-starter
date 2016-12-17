@@ -1,7 +1,9 @@
-import {SimpleToolbarComponent} from "./simple-toolbar/simple-toolbar.component";
-import {SimpleSidenavComponent} from "./simple-sidenav/simple-sidenav.component";
+import {DefaultToolbarComponent} from "./default-toolbar/default-toolbar.component";
+import {AppToolbarComponent} from "./app-toolbar/app-toolbar.component";
+import {AppSidenavComponent} from "./app-sidenav/app-sidenav.component";
 
 export const LayoutModule = angular.module('app.layout', [])
-  .component('simpleToolbar', SimpleToolbarComponent)
-  .component('simpleSidenav', SimpleSidenavComponent)
+  .component('defaultToolbar', DefaultToolbarComponent)
+  .component('appToolbar', AppToolbarComponent)
+  .component('appSidenav', AppSidenavComponent)
   .name;
