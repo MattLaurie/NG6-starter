@@ -1,5 +1,7 @@
 class ResetPasswordController {
-  constructor() {
+  constructor(AuthService) {
+    "ngInject";
+    this.auth = AuthService;
   }
 
   needsData(value) {

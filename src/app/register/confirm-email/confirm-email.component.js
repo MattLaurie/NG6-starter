@@ -1,5 +1,7 @@
 class ConfirmEmailController {
-  constructor() {
+  constructor(AuthService) {
+    "ngInject";
+    this.auth = AuthService;
   }
 
   needsData(value) {

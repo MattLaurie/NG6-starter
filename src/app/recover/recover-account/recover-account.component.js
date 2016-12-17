@@ -1,22 +1,24 @@
 class RecoverAccountController {
-  constructor() {
+  constructor(AuthService) {
+    "ngInject";
+    this.auth = AuthService;
   }
 
   recoverAccount() {
-    if (!step.completed) {
+    if (!this.step.completed) {
       this.recover.setWorking(true);
       const email = this.data.email;
       this.auth.forgotPassword(email)
         .then(result => {
           this.recover.setWorking(false);
-          step.completed = true;
-          step.error = undefined;
+          this.step.completed = true;
+          this.step.error = undefined;
           this.recover.nextStep();
         })
         .catch(error => {
           this.recover.setWorking(false);
-          step.completed = false;
-          step.error = error.message;
+          this.step.completed = false;
+          this.step.error = error.message;
         });
     } else {
       this.recover.nextStep();

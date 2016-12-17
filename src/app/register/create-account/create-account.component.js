@@ -1,5 +1,7 @@
 class CreateAccountController {
-  constructor() {
+  constructor(AuthService) {
+    "ngInject";
+    this.auth = AuthService;
   }
 
   createAccount() {
