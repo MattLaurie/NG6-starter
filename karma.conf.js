@@ -19,7 +19,8 @@ module.exports = function (config) {
       require("karma-mocha"),
       require("karma-mocha-reporter"),
       require("karma-sourcemap-loader"),
-      require("karma-webpack")
+      require("karma-webpack"),
+      require("karma-coverage")
     ],
 
     // preprocess matching files before serving them to the browser
@@ -43,7 +44,10 @@ module.exports = function (config) {
     },
 
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha'],
+    reporters: [
+      'mocha',
+      'coverage'
+    ],
 
     // web server port
     port: 9876,

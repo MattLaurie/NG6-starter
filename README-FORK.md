@@ -22,6 +22,7 @@ One nice feature of staying in Angular 1 though is that Material 1 is much furth
 * Removed top-level `app` component in favour of directly setting root layout in `index.html`
 * Added register and forgot password wizard flows 
 * Added a wizard generator component
+* Added coverage via `karma-coverage` and `istanbul`
 
 ## Recommended reading
 
@@ -263,6 +264,20 @@ e.g. a basic signin
       });
   }
 ```
+
+## Running test coverage
+
+This project uses `karma-coverage` and `istanbul` to provide test coverage details.  The project has been configured
+to only perform the instrumentation required for coverage when `NODE_ENV=test` is set.
+
+e.g. to run the coverage do the following:
+
+```
+$ NODE_ENV=test npm run test
+```
+
+To make the coverage work I had to include a `.babelrc` file to load the `istanbul` plugin only for the `test` 
+environments.  I also had to set a `es2015` preset.
 
 ## TODO
 
