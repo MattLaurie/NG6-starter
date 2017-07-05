@@ -1,4 +1,6 @@
-See [README-FORK.md](README-FORK.md)
+See [README-FORK.md](README-FORK.md) for details of the changes within this fork.
+
+*NOTE* Any new project should now be using Angular 2 instead. I don't see myself making any further changes to this project but I will still keep it around in case it can help someone else.
 
 <hr/>
 
